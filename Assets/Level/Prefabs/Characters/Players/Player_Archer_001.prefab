@@ -41,8 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6716417158786604332}
   - component: {fileID: 3790627728493948342}
-  - component: {fileID: 8924347315581458245}
+  - component: {fileID: 2507029136682854915}
   - component: {fileID: 9073638735148964551}
+  - component: {fileID: 8924347315581458245}
   - component: {fileID: 5340361686970182417}
   - component: {fileID: 8562982193406848912}
   - component: {fileID: 6679200870634306527}
@@ -67,7 +68,7 @@ Transform:
   m_Children:
   - {fileID: 17922127535725614}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3790627728493948342
 SpriteRenderer:
@@ -121,7 +122,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8924347315581458245
+--- !u!114 &2507029136682854915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,27 +131,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 8944427006932103044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: 923b178538abca64492060df3c326941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 6ec50c4f3a7a39347ac79965b9c33ead, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  playerInformations:
+    foreName: 
+    lastName: 
+    minAge: 0
+    maxAge: 0
+    currentAge: 0
+  currencyInformations:
+    currencyName1: 
+    minCurrency1: 0
+    maxCurrency1: 0
+    currentCurrency1: 0
+    currencyName2: 
+    minCurrency2: 0
+    maxCurrency2: 0
+    currentCurrency2: 0
+    currencyName3: 
+    minCurrency3: 0
+    maxCurrency3: 0
+    currentCurrency_003: 0
+  levelStatistics:
+    minLevel: 0
+    maxLevel: 0
+    currentLevel: 0
+    minExperiencePoints: 0
+    maxExperiencePoints: 0
+    currentExperiencePoints: 0
+  combatStatistics:
+    minHealth: 0
+    maxHealth: 100
+    currentHealth: 100
+    minArmour: 0
+    maxArmour: 0
+    currentArmour: 0
+    minPhysicalDefense: 25
+    maxPhysicalDefense: 350
+    currentPhysicalDefense: 0
+    minStamina: 0
+    maxStamina: 0
+    currentStamina: 0
+    minPhysicalDamage: 0
+    maxPhysicalDamage: 0
+    currentPhysicalDamage: 0
+    minPhysicalPenetration: 0
+    maxPhysicalPenetration: 0
+    currentPhysicalPenetration: 0
+    minCriticalStrikeDamage: 0
+    maxCriticalStrikeDamage: 0
+    currentCriticalStrikeDamage: 0
+    minCriticalStrikeChance: 0
+    maxCriticalStrikeChance: 0
+    currentCriticalStrikeChance: 0
+    minCriticalStrikeChanceMultiplier: 0
+    maxCriticalStrikeChanceMultiplier: 0
+    currentCriticalStrikeChanceMultiplier: 0
 --- !u!114 &9073638735148964551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +218,36 @@ MonoBehaviour:
   collisionOffset: 0.005
   arrowPrefab: {fileID: 322672633265747853, guid: 5476d9813a44bd847903aadf52fd6838, type: 3}
   firePoint: {fileID: 17922127535725614}
+--- !u!114 &8924347315581458245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944427006932103044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 6ec50c4f3a7a39347ac79965b9c33ead, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!50 &5340361686970182417
 Rigidbody2D:
   serializedVersion: 4

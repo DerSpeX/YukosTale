@@ -74,10 +74,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c7ff2e96e381547b52e5c1b8a70c0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  arrowSpeed: 10
+  projectileLifespan: 2.5
   rb: {fileID: 8673279388573471590}
   impactEffect: {fileID: 0}
-  projectileLifespan: 2.5
 --- !u!61 &3078202050160576492
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -4
   m_Sprite: {fileID: 1558939893, guid: 188f831c5fc34c343a0b8cf5dbe78e31, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

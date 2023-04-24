@@ -5,9 +5,9 @@ using UnityEngine;
 public class Arrow_Standard_001 : MonoBehaviour
 {
     [Description("Speed of the Arrow projectile")]
-    [SerializeField ]private float arrowSpeed = 10f; // Geschwindigkeit des Pfeils
-    public Rigidbody2D rb; // Rigidbody2D-Komponente des Pfeils
-    public GameObject impactEffect; // Referenz auf ein Effekt-Objekt, das abgespielt wird, wenn der Pfeil einschlägt
+    [SerializeField] private float arrowSpeed = 10f; // Geschwindigkeit des Pfeils
+    [SerializeField] private Rigidbody2D rb; // Rigidbody2D-Komponente des Pfeils
+    [SerializeField] private GameObject impactEffect; // Referenz auf ein Effekt-Objekt, das abgespielt wird, wenn der Pfeil einschlägt
     public float projectileLifespan;// Zeit bis sich der Pfeil ohne vorige Kollision von alleine zerstört
 
     private void Update()
@@ -18,7 +18,7 @@ public class Arrow_Standard_001 : MonoBehaviour
     // Pfeil wird beim Start in eine Richtung geschossen
     void Start()
     {
-        rb.velocity = transform.right * speed;
+        rb.velocity = transform.right * arrowSpeed;
     }
 
     // Wenn der Pfeil auf ein Objekt trifft, wird der Aufprall-Effekt abgespielt und der Pfeil wird zerstört

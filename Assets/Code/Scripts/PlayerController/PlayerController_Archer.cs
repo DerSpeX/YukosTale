@@ -1,12 +1,11 @@
-using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController_Archer : MonoBehaviour
 {
+    #region Variables
     
     [SerializeField] private float movementSpeed;
     [SerializeField] private ContactFilter2D movementFilter;
@@ -18,19 +17,20 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput;
     private Rigidbody2D rb;
     private Animator animator;
-    private SpriteRenderer spriteRenderer;
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
 
     private bool canMove = true;
+    private bool wasInteractPressed;
 
     private string InputReminderString;
+    
+    #endregion
+    #region Unity Functions
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
     private void FixedUpdate()
     {
         if (canMove)
@@ -57,15 +57,15 @@ public class PlayerController : MonoBehaviour
 
             if (movementInput.x < 0)
             {
-                firePoint.localPosition = (new Vector3(-1.25f, -1.5f, 0));
-                firePoint.localRotation = (new Quaternion(0, -180, 0, 1));
+                //firePoint.localPosition = (new Vector3(-1.25f, -1.5f, 0));
+                //firePoint.localRotation = (new Quaternion(0, -180, 0, 1));
                 animator.SetBool("isMovingLeft", true);
                 animator.SetInteger("LastDirection", 4);
             }
             else if (movementInput.x > 0)
             {
-                firePoint.localPosition = (new Vector3(1.25f, -1.5f, 0));
-                firePoint.localRotation = (new Quaternion(0, 0, 0, 1));
+                //firePoint.localPosition = (new Vector3(1.25f, -1.5f, 0));
+                //firePoint.localRotation = (new Quaternion(0, 0, 0, 1));
                 animator.SetBool("isMovingRight", true);
                 animator.SetInteger("LastDirection", 2);
             }
@@ -98,7 +98,26 @@ public class PlayerController : MonoBehaviour
             firePoint.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Chest")
+        {
+            InputReminderString = "Press 'E'";
+            print("Du stehst an der Chest!");
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                print("Du hast die Chest geöffnet!");
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        InputReminderString = "";
+    }
+    
+    #endregion
+    #region Custom Functions
+    //Check some Conditions if player can move or not
     private bool TryMove(Vector2 direction)
     {
         if (direction != Vector2.zero)
@@ -121,48 +140,31 @@ public class PlayerController : MonoBehaviour
             return false; 
         }
     }
-    
+    //OnMove == Trigger for new Input System // Moves the Player along the Inputs
     void OnMove(InputValue movementValue)
     {
         movementInput = movementValue.Get<Vector2>();
     }
-
+    //OnFire == Trigger for new Input System // Let the Player use The Weapon
     void OnFire()
     {
         animator.SetTrigger("BowRangeAttack");
         Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
     }
-    
+    //Lock the Players Movement
     public void LockMovement()
     {
         canMove = false;
     }
-
+    //Unlock the Players Movement
     public void UnlockMovement()
     {
         canMove = true;
     }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Chest")
-        {
-            InputReminderString = "Press 'E'";
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                //Cast to Chest... Looting will Starting
-                print("You looted the Chest... Congrats");
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        InputReminderString = "";
-    }
-
+    //Testing for Input Reminders on UI
     public string GetInputReminderString()
     {
         return InputReminderString;
     }
+    #endregion
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -2575001891723924832}
   - component: {fileID: 3078202050160576492}
   m_Layer: 0
-  m_Name: Arrow_Bow_001
+  m_Name: Arrow_Standard_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

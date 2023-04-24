@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class Arrow_Standard_001 : MonoBehaviour
 {
-    public float speed = 10f; // Geschwindigkeit des Pfeils
+    [Description("Speed of the Arrow projectile")]
+    [SerializeField ]private float arrowSpeed = 10f; // Geschwindigkeit des Pfeils
     public Rigidbody2D rb; // Rigidbody2D-Komponente des Pfeils
     public GameObject impactEffect; // Referenz auf ein Effekt-Objekt, das abgespielt wird, wenn der Pfeil einschlägt
     public float projectileLifespan;// Zeit bis sich der Pfeil ohne vorige Kollision von alleine zerstört
@@ -28,11 +30,6 @@ public class Arrow : MonoBehaviour
             Destroy(gameObject); // Zerstöre den Pfeil
         }
         print("TRIGGER"+hitInfo.gameObject.ToString());
-    }
-
-    private void OnCollisionEnter2D(BoxCollider2D col)
-    {
-        print("COL"+col.gameObject.ToString());
     }
 }
 

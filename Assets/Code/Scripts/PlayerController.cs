@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    
     [SerializeField] private float movementSpeed;
     [SerializeField] private ContactFilter2D movementFilter;
     [SerializeField] private float collisionOffset;
-    
-    //reference Scripts
-    public BowMeeleAttack bowMeleeAttack;
+
+    public GameObject arrowPrefab;
+    public Transform firePoint;
 
     private Vector2 movementInput;
     private Rigidbody2D rb;
@@ -20,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
 
     private bool canMove = true;
+
+    private string InputReminderString;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -53,12 +57,45 @@ public class PlayerController : MonoBehaviour
 
             if (movementInput.x < 0)
             {
-                spriteRenderer.flipX = true;
+                firePoint.localPosition = (new Vector3(-1.25f, -1.5f, 0));
+                firePoint.localRotation = (new Quaternion(0, -180, 0, 1));
+                animator.SetBool("isMovingLeft", true);
+                animator.SetInteger("LastDirection", 4);
             }
             else if (movementInput.x > 0)
             {
-                spriteRenderer.flipX = false;
+                firePoint.localPosition = (new Vector3(1.25f, -1.5f, 0));
+                firePoint.localRotation = (new Quaternion(0, 0, 0, 1));
+                animator.SetBool("isMovingRight", true);
+                animator.SetInteger("LastDirection", 2);
             }
+            else
+            {
+                animator.SetBool("isMovingLeft", false);
+                animator.SetBool("isMovingRight", false);
+            }
+
+            if (movementInput.y < 0)
+            {
+                animator.SetBool("isMovingDown", true);
+                animator.SetInteger("LastDirection", 3);
+            }
+            else if (movementInput.y > 0)
+            {
+                animator.SetBool("isMovingUp", true);
+                animator.SetInteger("LastDirection", 1);
+            }
+            else
+            {
+                animator.SetBool("isMovingUp", false);
+                animator.SetBool("isMovingDown", false);
+            }
+            
+            // Rotation des Feuerpunkts, um in Richtung Mauszeiger zu zielen
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Vector2 direction = (mousePos - transform.position).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            firePoint.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
 
@@ -92,28 +129,40 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        animator.SetTrigger("BowMeeleAttack");
+        animator.SetTrigger("BowRangeAttack");
+        Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
     }
-
-    public void BowMeeleAttack()
-    {
-        LockMovement();
-        if (spriteRenderer.flipX == true)
-        {
-            bowMeleeAttack.AttackLeft();
-        }
-        else
-        {
-            bowMeleeAttack.AttackRight();
-        }
-    }
+    
     public void LockMovement()
     {
-        canMove = false; 
+        canMove = false;
     }
 
     public void UnlockMovement()
     {
         canMove = true;
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Chest")
+        {
+            InputReminderString = "Press 'E'";
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                //Cast to Chest... Looting will Starting
+                print("You looted the Chest... Congrats");
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        InputReminderString = "";
+    }
+
+    public string GetInputReminderString()
+    {
+        return InputReminderString;
     }
 }

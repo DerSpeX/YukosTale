@@ -30,10 +30,12 @@ public class Arrow_Standard_001 : MonoBehaviour
     {
         if (collison.gameObject.tag == "Enemy") // Wenn der Pfeil ein Objekt mit dem Tag "Enemy" trifft
         {
-            Instantiate(impactEffect, transform.position, transform.rotation); // Erzeuge den Aufprall-Effekt an der Position des Pfeils
+            GameObject impactEffectGO = Instantiate(impactEffect, collison.gameObject.transform.localPosition, collison.gameObject.transform.localRotation); // Erzeuge den Aufprall-Effekt an der Position des Pfeils
+            Destroy(impactEffectGO, 1f);
             Destroy(gameObject); // Zerstöre den Pfeil
         }
     }
+
     #endregion
 }
 

@@ -1,3 +1,4 @@
+
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -5,6 +6,14 @@ using Random = UnityEngine.Random;
 public class PlayerStatHandler : MonoBehaviour
 {
     #region Variables
+    public ScriptReferences scriptReferences;
+    [System.Serializable]
+    public class ScriptReferences
+    {
+        public EquipmentHandler equipmentHandler;
+        public InventoryHandler inventoryHandler;
+        //Space for more Handlers
+    }
     public PlayerInformations playerInformations;
     [System.Serializable]
     public class PlayerInformations
@@ -45,7 +54,7 @@ public class PlayerStatHandler : MonoBehaviour
         public int minCurrency3;
         public int maxCurrency3;
         [Space(10)] 
-        public int currentCurrency_003;
+        public int currentCurrency3;
 
     }
     
@@ -67,7 +76,6 @@ public class PlayerStatHandler : MonoBehaviour
         public int maxExperiencePoints;
         [Space(10)]
         public int currentExperiencePoints;
-        
     }
     
     public CombatStatistics combatStatistics;
@@ -155,7 +163,6 @@ public class PlayerStatHandler : MonoBehaviour
             // No Penetration = No Damage... Bruh
         }
     }
-
     public void TakeDamageOverTime(float physicalDamage, float physicalPenetration, float duration)
     {
         float physicalDefense =  GetPhysicalDefense();

@@ -1,6 +1,9 @@
 
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
 
 public class PlayerStatHandler : MonoBehaviour
@@ -12,6 +15,7 @@ public class PlayerStatHandler : MonoBehaviour
     {
         public EquipmentHandler equipmentHandler;
         public InventoryHandler inventoryHandler;
+        public HUDHandler hudHandler;
         //Space for more Handlers
     }
     public PlayerInformations playerInformations;
@@ -72,10 +76,10 @@ public class PlayerStatHandler : MonoBehaviour
         
         [Header("Experience")]
         [Space(10)]
-        public int minExperiencePoints;
-        public int maxExperiencePoints;
+        public float minExperiencePoints;
+        public float maxExperiencePoints;
         [Space(10)]
-        public int currentExperiencePoints;
+        public float currentExperiencePoints;
     }
     
     public CombatStatistics combatStatistics;
@@ -137,13 +141,23 @@ public class PlayerStatHandler : MonoBehaviour
     }
     #endregion
     #region Unity Functions
-    private void Update()
+
+    private void Awake()
     {
-        // Maybe currentHealth <= minHealth = Die();... but, it also happens in TakeDamage Functions
-        // if ESCAPE Pressed -> open Ingame Menu
+        combatStatistics.currentHealth = combatStatistics.maxHealth; //Later, combatStatistics.currentHealth = cloud.currentHealth... -> Sync Local with cloud!
     }
+
+    private void Start()
+    {
+        UpdateHUDHealthStats();
+        UpdateHUDLevelAndExperienceStats();
+    }
+
     #endregion
     #region Custom Functions
+    /// <summary>
+    /// Combat Area
+    /// </summary>
     //Take Damage - Werteberechnung erfolgt aus dem min und max
     public void TakeInstantDamage(float physicalDamage, float physicalPenetration)
     {
@@ -157,6 +171,7 @@ public class PlayerStatHandler : MonoBehaviour
                 Die();
             }
             combatStatistics.currentHealth -= physicalDamage;
+            UpdateHUDHealthStats();
         }
         else if (physicalPenetration < physicalDefense)
         {
@@ -184,10 +199,12 @@ public class PlayerStatHandler : MonoBehaviour
             if (combatStatistics.currentHealth + healthAmount >= combatStatistics.maxHealth)
             {
                 combatStatistics.currentHealth = combatStatistics.maxHealth;
+                UpdateHUDHealthStats();
             }
             else
             {
                 combatStatistics.currentHealth += healthAmount;
+                UpdateHUDHealthStats();
             }
         }
     }
@@ -212,11 +229,13 @@ public class PlayerStatHandler : MonoBehaviour
                 combatStatistics.currentHealth += amountToAdd;
 
                 timer += Time.deltaTime;
+                UpdateHUDHealthStats();
             }
             else if (combatStatistics.currentHealth + healthAmountPerSecond >= combatStatistics.maxHealth)
             {
                 combatStatistics.currentHealth = combatStatistics.maxHealth;
                 duration = 0;
+                UpdateHUDHealthStats();
             }
             yield return null;
         }
@@ -233,32 +252,128 @@ public class PlayerStatHandler : MonoBehaviour
                 combatStatistics.currentHealth -= amountToReduce;
 
                 timer += Time.deltaTime;
+                UpdateHUDHealthStats();
             }
             else if (combatStatistics.currentHealth - damageAmountPerSecond <= combatStatistics.minHealth)
             {
                 combatStatistics.currentHealth = combatStatistics.minHealth;
+                UpdateHUDHealthStats();
                 Die();
             }
             yield return null;
         }
     }
+    
     //WerteBerechnung
     private float GetPhysicalDefense()
     {
         combatStatistics.currentPhysicalDefense = Random.Range(combatStatistics.minPhysicalDefense, combatStatistics.maxPhysicalDefense);
         return combatStatistics.currentPhysicalDefense;
     } //Maybe call it CalculatePhysicalDefense
+    
+    /// <summary>
+    /// Leveling Area
+    /// </summary>
+    // Methode, um Erfahrungspunkte hinzuzufügen und LevelUp zu überprüfen
+    public void AddExperience(float experiencePoints)
+    {
+        // Hinzufügen der neuen Erfahrungspunkte
+        levelStatistics.currentExperiencePoints += experiencePoints;
+        UpdateHUDLevelAndExperienceStats();
 
+        if (levelStatistics.currentLevel < levelStatistics.maxLevel)
+        {
+            // Schleife zum Überprüfen, ob mehrere LevelUps auf einmal stattfinden
+            while (levelStatistics.currentExperiencePoints >= levelStatistics.maxExperiencePoints)
+            {
+                // Verbleibende Erfahrungspunkte für das nächste Level merken
+                float remainingExperience = levelStatistics.currentExperiencePoints - levelStatistics.maxExperiencePoints;
+
+                // Aufstieg auf das nächste Level
+                LevelUp();
+
+                // Aktualisieren der MaxExperiencePoints für das nächste Level
+                levelStatistics.maxExperiencePoints *= 1.2f; //Maybe Random betwen factor x and X
+
+                // Verbleibende Erfahrungspunkte setzen, um den Fortschritt zum nächsten Level zu berücksichtigen
+                levelStatistics.currentExperiencePoints = remainingExperience;
+                UpdateHUDLevelAndExperienceStats();
+            }
+        }
+        else if (levelStatistics.currentLevel >= levelStatistics.maxLevel)
+        {
+            if (levelStatistics.currentExperiencePoints + experiencePoints >= levelStatistics.maxExperiencePoints)
+            {
+                levelStatistics.currentExperiencePoints = levelStatistics.maxExperiencePoints;
+                UpdateHUDLevelAndExperienceStats();
+            }
+            else
+            {
+                levelStatistics.currentExperiencePoints += experiencePoints;
+                UpdateHUDLevelAndExperienceStats();
+            }
+            UpdateHUDLevelAndExperienceStats();
+        }
+    }
+
+    // Methode zum Aufsteigen auf das nächste Level
+    private void LevelUp()
+    {
+        if (levelStatistics.currentLevel < levelStatistics.maxLevel)
+        {
+            levelStatistics.currentLevel++;
+            //Stuff what happens beim Level Up
+            UpdateHUDLevelAndExperienceStats();
+        }
+        else if (levelStatistics.currentLevel == levelStatistics.maxLevel && levelStatistics.currentExperiencePoints >= levelStatistics.maxExperiencePoints)
+        {
+            levelStatistics.currentExperiencePoints = levelStatistics.maxExperiencePoints;
+            UpdateHUDLevelAndExperienceStats();
+        }
+    }
+
+    // Methode, um den Fortschritt in Prozent zwischen minLevel und maxLevel zu erhalten
+    public float GetLevelProgress()
+    {
+        if (levelStatistics.currentLevel == levelStatistics.maxLevel)
+        {
+            return 1f;
+        }
+        else
+        {
+            float currentLevelPoints = levelStatistics.currentExperiencePoints - levelStatistics.minExperiencePoints;
+            float nextLevelPoints = levelStatistics.maxExperiencePoints - levelStatistics.minExperiencePoints;
+            return currentLevelPoints / nextLevelPoints;
+        }
+    } //ATM Unnecessary
+
+    /// <summary>
+    /// Noch nicht zugeordnete Funktionen
+    /// </summary>
+    //Initiate the Stat Saves in the Cloud from PlayFab
     public void SaveStats()
     {
         //Save Stats... Call PlayFab Stat Save Script
     }
     public void Die()
     {
+        Debug.Log("You died!");
         //Player Died. 
         //Destroy(gameObject);
         //Load Death Screen
         //Maybe SaveStats(); here
     }
+    
+    //Initiate the Visual Update for Health Stats in the UI
+    private void UpdateHUDHealthStats()
+    {
+        scriptReferences.hudHandler.UpdatePlayersHealthStats(combatStatistics.minHealth, combatStatistics.maxHealth, combatStatistics.currentHealth);
+    }
+    private void UpdateHUDLevelAndExperienceStats()
+    {
+        scriptReferences.hudHandler.UpdatePlayerLevelAndExperienceStats(levelStatistics.currentLevel, levelStatistics.minExperiencePoints, levelStatistics.maxExperiencePoints, levelStatistics.currentExperiencePoints);
+    }
+    
+
     #endregion
 }

@@ -42,9 +42,9 @@ GameObject:
   - component: {fileID: 6716417158786604332}
   - component: {fileID: 3790627728493948342}
   - component: {fileID: 2507029136682854915}
+  - component: {fileID: 3855082761672877174}
+  - component: {fileID: 5111798053150540455}
   - component: {fileID: 9073638735148964551}
-  - component: {fileID: 9031075569220742700}
-  - component: {fileID: 8399534006998202443}
   - component: {fileID: 8924347315581458245}
   - component: {fileID: 5340361686970182417}
   - component: {fileID: 8562982193406848912}
@@ -70,7 +70,7 @@ Transform:
   m_Children:
   - {fileID: 17922127535725614}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3790627728493948342
 SpriteRenderer:
@@ -137,8 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scriptReferences:
-    equipmentHandler: {fileID: 9031075569220742700}
-    inventoryHandler: {fileID: 8399534006998202443}
+    equipmentHandler: {fileID: 3855082761672877174}
+    inventoryHandler: {fileID: 5111798053150540455}
+    hudHandler: {fileID: 0}
   playerInformations:
     foreName: 
     lastName: 
@@ -159,16 +160,16 @@ MonoBehaviour:
     maxCurrency3: 0
     currentCurrency3: 0
   levelStatistics:
-    minLevel: 0
-    maxLevel: 0
-    currentLevel: 0
+    minLevel: 1
+    maxLevel: 10
+    currentLevel: 1
     minExperiencePoints: 0
-    maxExperiencePoints: 0
+    maxExperiencePoints: 100
     currentExperiencePoints: 0
   combatStatistics:
     minHealth: 0
     maxHealth: 1000
-    currentHealth: 500.7
+    currentHealth: 10
     minArmour: 0
     maxArmour: 0
     currentArmour: 0
@@ -193,6 +194,30 @@ MonoBehaviour:
     minCriticalStrikeChanceMultiplier: 0
     maxCriticalStrikeChanceMultiplier: 0
     currentCriticalStrikeChanceMultiplier: 0
+--- !u!114 &3855082761672877174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944427006932103044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26ebae524da24b44a0cf768e0452eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5111798053150540455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944427006932103044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56a267033cdf1642b31332be0f4c25e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9073638735148964551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,30 +249,6 @@ MonoBehaviour:
   arrowPrefab: {fileID: 322672633265747853, guid: 5476d9813a44bd847903aadf52fd6838, type: 3}
   arrowPrefab2: {fileID: 5062486217668031226, guid: 859de0feedc3bf8488cca8fa3ac7af3f, type: 3}
   firePoint: {fileID: 17922127535725614}
---- !u!114 &9031075569220742700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8944427006932103044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c26ebae524da24b44a0cf768e0452eb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8399534006998202443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8944427006932103044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f56a267033cdf1642b31332be0f4c25e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8924347315581458245
 MonoBehaviour:
   m_ObjectHideFlags: 0

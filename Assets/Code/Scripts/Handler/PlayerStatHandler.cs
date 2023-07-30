@@ -1,12 +1,10 @@
-
 using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
 
-public class PlayerStatHandler : MonoBehaviour
+public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlich eine CharacterStatHandler und PLayerStatHandler ist eigentlich ein UserStatHandler
 {
     #region Variables
     public ScriptReferences scriptReferences;
@@ -16,8 +14,10 @@ public class PlayerStatHandler : MonoBehaviour
         public EquipmentHandler equipmentHandler;
         public InventoryHandler inventoryHandler;
         public HUDHandler hudHandler;
+        public PlayFabManager playFabManager;
         //Space for more Handlers
     }
+    
     public PlayerInformations playerInformations;
     [System.Serializable]
     public class PlayerInformations
@@ -30,10 +30,14 @@ public class PlayerStatHandler : MonoBehaviour
         
         [Header("Age")]
         [Space(10)]
-        public int minAge;
-        public int maxAge;
-        [Space(10)]
         public int currentAge;
+        [Space(25)]
+        
+        [Header("Location")]
+        [Space(10)]
+        public float currentPosX;
+        public  float currentPosY;
+        public float currentPosZ;
     }
     
     public CurrencyInformations currencyInformations;
@@ -43,20 +47,14 @@ public class PlayerStatHandler : MonoBehaviour
         [Header("Currencies")]
         [Space(10)]
         public string currencyName1;
-        public int minCurrency1;
-        public int maxCurrency1;
         [Space(10)] 
         public int currentCurrency1;
         [Space(25)]
         public string currencyName2;
-        public int minCurrency2;
-        public int maxCurrency2;
         [Space(10)] 
         public int currentCurrency2;
         [Space(25)]
         public string currencyName3;
-        public int minCurrency3;
-        public int maxCurrency3;
         [Space(10)] 
         public int currentCurrency3;
 
@@ -80,6 +78,19 @@ public class PlayerStatHandler : MonoBehaviour
         public float maxExperiencePoints;
         [Space(10)]
         public float currentExperiencePoints;
+        [Space(10)]
+        public float leftExperiencePoints;
+        
+        [Header("Attribute Points")]
+        [Space(10)]
+        public int minAttributePoints;
+        public int maxAttributePoints;
+        [Space(10)]
+        public int currentAttributePoints;
+        [Space(10)]
+        public int spentAttributePoints;
+        [Space(10)]
+        public int attributeRefundPoints;
     }
     
     public CombatStatistics combatStatistics;
@@ -103,6 +114,11 @@ public class PlayerStatHandler : MonoBehaviour
         [Space(10)]
         public float currentPhysicalDefense;
         [Space(25)]
+        public float minTacticalDefense;
+        public float maxTacticalDefense;
+        [Space(10)]
+        public float currentTacticalDefense;
+        [Space(25)]
         
         [Header("Neutrals")]
         [Space(10)]
@@ -119,10 +135,20 @@ public class PlayerStatHandler : MonoBehaviour
         [Space(10)]
         public float currentPhysicalDamage;
         [Space(25)]
+        public float minTacticalDamage;
+        public float maxTacticalDamage;
+        [Space(10)]
+        public float currentTacticalDamage;
+        [Space(25)]
         public float minPhysicalPenetration;
         public float maxPhysicalPenetration;
         [Space(10)]
         public float currentPhysicalPenetration;
+        [Space(25)]
+        public float minTacticalPenetration;
+        public float maxTacticalPenetration;
+        [Space(10)]
+        public float currentTacticalPenetration;
         [Space(25)]
         public float minCriticalStrikeDamage;
         public float maxCriticalStrikeDamage;
@@ -145,12 +171,29 @@ public class PlayerStatHandler : MonoBehaviour
     private void Awake()
     {
         combatStatistics.currentHealth = combatStatistics.maxHealth; //Later, combatStatistics.currentHealth = cloud.currentHealth... -> Sync Local with cloud!
+        scriptReferences.playFabManager.LogIn();
+        Debug.Log("LOGIN IST FERTIG!");
     }
 
     private void Start()
     {
+        //Möglicherweise SPäter zu einem GameManager auslagern und dort erstmalige Updates etc. durchlaufen lassen
         UpdateHUDHealthStats();
+        Debug.Log("Health Stats wurden geupdated!");
         UpdateHUDLevelAndExperienceStats();
+        Debug.Log("Level Stats wurden geupdatedet!");
+    }
+
+    private void Update()
+    {
+        playerInformations.currentPosX = transform.position.x;
+        playerInformations.currentPosY = transform.position.y;
+        playerInformations.currentPosZ = transform.position.z;
+        
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            scriptReferences.playFabManager.GetAllCharacterData(playerInformations.foreName, playerInformations.lastName, playerInformations.currentAge, playerInformations.currentPosX, playerInformations.currentPosY, playerInformations.currentPosZ, currencyInformations.currencyName1, currencyInformations.currentCurrency1, currencyInformations.currencyName2, currencyInformations.currentCurrency2, currencyInformations.currencyName3, currencyInformations.currentCurrency3, levelStatistics.minLevel, levelStatistics.maxLevel, levelStatistics.currentLevel, levelStatistics.minExperiencePoints, levelStatistics.maxExperiencePoints, levelStatistics.currentExperiencePoints, levelStatistics.leftExperiencePoints , levelStatistics.minAttributePoints, levelStatistics.maxAttributePoints, levelStatistics.currentAttributePoints, levelStatistics.spentAttributePoints, levelStatistics.attributeRefundPoints, combatStatistics.minHealth, combatStatistics.maxHealth, combatStatistics.currentHealth, combatStatistics.minStamina, combatStatistics.maxStamina, combatStatistics.currentStamina, combatStatistics.minArmour, combatStatistics.maxArmour, combatStatistics.currentArmour, combatStatistics.minPhysicalDefense, combatStatistics.maxPhysicalDefense, combatStatistics.currentPhysicalDefense, combatStatistics.minTacticalDefense, combatStatistics.maxTacticalDefense, combatStatistics.currentTacticalDefense, combatStatistics.minPhysicalDamage, combatStatistics.maxPhysicalDamage, combatStatistics.currentPhysicalDamage, combatStatistics.minTacticalDamage, combatStatistics.maxTacticalDamage, combatStatistics.currentTacticalDamage, combatStatistics.minPhysicalPenetration, combatStatistics.maxPhysicalPenetration, combatStatistics.currentPhysicalPenetration, combatStatistics.minTacticalPenetration, combatStatistics.maxTacticalPenetration, combatStatistics.currentTacticalPenetration, combatStatistics.minCriticalStrikeDamage, combatStatistics.maxCriticalStrikeDamage, combatStatistics.currentCriticalStrikeDamage, combatStatistics.minCriticalStrikeChance, combatStatistics.maxCriticalStrikeChance, combatStatistics.currentCriticalStrikeChance, combatStatistics.minCriticalStrikeChanceMultiplier, combatStatistics.maxCriticalStrikeChanceMultiplier, combatStatistics.currentCriticalStrikeChanceMultiplier );
+        }
     }
 
     #endregion
@@ -279,6 +322,8 @@ public class PlayerStatHandler : MonoBehaviour
     {
         // Hinzufügen der neuen Erfahrungspunkte
         levelStatistics.currentExperiencePoints += experiencePoints;
+        // Berechnung der fehlenden Erfahrunspunkte zum näcshten level Up 
+        levelStatistics.leftExperiencePoints = levelStatistics.maxExperiencePoints - levelStatistics.currentExperiencePoints;
         UpdateHUDLevelAndExperienceStats();
 
         if (levelStatistics.currentLevel < levelStatistics.maxLevel)

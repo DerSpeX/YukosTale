@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
+  m_Script: {fileID: 0}
   m_Name: PlayFabEditorPrefsSO
-  m_EditorClassIdentifier: 
-  DevAccountEmail: 
-  DevAccountToken: 
+  m_EditorClassIdentifier: PlayFabEditorExtensions:PlayFab.PfEditor:PlayFabEditorPrefsSO
+  DevAccountEmail: florian.wiedenbein@games-academy.de
+  DevAccountToken: 6tdmwuz6fa53h9diu3j7kq45qi1sasr5erksmn859z5jkbx7to7arbf9c4mcm91amh8bp4orr7abzwbxj9azd5iikjurpycdk5qdettqarudpfykjukqpa76jkngrunqjaugedjc5wig5f9nx999b95yateq3xqpxbcobh85iebz9tfpf39oz1it66rn4enfbikqdg1t
   AadAuthorization: 
-  SelectedStudio: 
-  SdkPath: 
+  SelectedStudio: Holy Games Studio
+  SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0

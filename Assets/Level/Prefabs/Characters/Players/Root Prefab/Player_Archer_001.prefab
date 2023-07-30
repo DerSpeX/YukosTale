@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2507029136682854915}
   - component: {fileID: 3855082761672877174}
   - component: {fileID: 5111798053150540455}
+  - component: {fileID: 3100453030281873325}
   - component: {fileID: 9073638735148964551}
   - component: {fileID: 8924347315581458245}
   - component: {fileID: 5340361686970182417}
@@ -140,25 +141,21 @@ MonoBehaviour:
     equipmentHandler: {fileID: 3855082761672877174}
     inventoryHandler: {fileID: 5111798053150540455}
     hudHandler: {fileID: 0}
+    playFabManager: {fileID: 3100453030281873325}
   playerInformations:
-    foreName: 
-    lastName: 
-    minAge: 0
-    maxAge: 0
-    currentAge: 0
+    foreName: Florian
+    lastName: Wiedenbein
+    currentAge: 23
+    currentPosX: 0
+    currentPosY: 0
+    currentPosZ: 0
   currencyInformations:
-    currencyName1: 
-    minCurrency1: 0
-    maxCurrency1: 0
-    currentCurrency1: 0
-    currencyName2: 
-    minCurrency2: 0
-    maxCurrency2: 0
-    currentCurrency2: 0
-    currencyName3: 
-    minCurrency3: 0
-    maxCurrency3: 0
-    currentCurrency3: 0
+    currencyName1: Gold
+    currentCurrency1: 10
+    currencyName2: Silver
+    currentCurrency2: 20
+    currencyName3: Copper
+    currentCurrency3: 30
   levelStatistics:
     minLevel: 1
     maxLevel: 10
@@ -166,6 +163,12 @@ MonoBehaviour:
     minExperiencePoints: 0
     maxExperiencePoints: 100
     currentExperiencePoints: 0
+    leftExperiencePoints: 0
+    minAttributePoints: 0
+    maxAttributePoints: 0
+    currentAttributePoints: 0
+    spentAttributePoints: 0
+    attributeRefundPoints: 0
   combatStatistics:
     minHealth: 0
     maxHealth: 1000
@@ -176,15 +179,24 @@ MonoBehaviour:
     minPhysicalDefense: 75
     maxPhysicalDefense: 350
     currentPhysicalDefense: 0
+    minTacticalDefense: 0
+    maxTacticalDefense: 0
+    currentTacticalDefense: 0
     minStamina: 0
     maxStamina: 0
     currentStamina: 0
     minPhysicalDamage: 0
     maxPhysicalDamage: 0
     currentPhysicalDamage: 0
+    minTacticalDamage: 0
+    maxTacticalDamage: 0
+    currentTacticalDamage: 0
     minPhysicalPenetration: 0
     maxPhysicalPenetration: 0
     currentPhysicalPenetration: 0
+    minTacticalPenetration: 0
+    maxTacticalPenetration: 0
+    currentTacticalPenetration: 0
     minCriticalStrikeDamage: 0
     maxCriticalStrikeDamage: 0
     currentCriticalStrikeDamage: 0
@@ -218,6 +230,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56a267033cdf1642b31332be0f4c25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3100453030281873325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944427006932103044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e0ecd1aa4394e4aa0ca38d6b6987ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customID: 4B07C1A17D882DEA
+  characterName: Florian Wiedenbein
+  characterID: 
+  playFabID: 
+  characterData:
+    foreName: 
+    lastName: 
+    currentAge: 0
+    currentPosX: 0
+    currentPosY: 0
+    currentPosZ: 0
+    currencyName1: 
+    currentCurrency1: 0
+    currencyName2: 
+    currentCurrency2: 0
+    currencyName3: 
+    currentCurrency3: 0
+    minLevel: 0
+    maxLevel: 0
+    currentLevel: 0
+    minExperiencePoints: 0
+    maxExperiencePoints: 0
+    currentExperiencePoints: 0
+    leftExperiencePoints: 0
+    minAttributePoints: 0
+    maxAttributePoints: 0
+    currentAttributePoints: 0
+    spentAttributePoints: 0
+    attributeRefundPoints: 0
+    minHealth: 0
+    maxHealth: 0
+    currentHealth: 0
+    minArmour: 0
+    maxArmour: 0
+    currentArmour: 0
+    minPhysicalDefense: 0
+    maxPhysicalDefense: 0
+    currentPhysicalDefense: 0
+    minTacticalDefense: 0
+    maxTacticalDefense: 0
+    currentTacticalDefense: 0
+    minStamina: 0
+    maxStamina: 0
+    currentStamina: 0
+    minPhysicalDamage: 0
+    maxPhysicalDamage: 0
+    currentPhysicalDamage: 0
+    minTacticalDamage: 0
+    maxTacticalDamage: 0
+    currentTacticalDamage: 0
+    minPhysicalPenetration: 0
+    maxPhysicalPenetration: 0
+    currentPhysicalPenetration: 0
+    minTacticalPenetration: 0
+    maxTacticalPenetration: 0
+    currentTacticalPenetration: 0
+    minCriticalStrikeDamage: 0
+    maxCriticalStrikeDamage: 0
+    currentCriticalStrikeDamage: 0
+    minCriticalStrikeChance: 0
+    maxCriticalStrikeChance: 0
+    currentCriticalStrikeChance: 0
+    minCriticalStrikeChanceMultiplier: 0
+    maxCriticalStrikeChanceMultiplier: 0
+    currentCriticalStrikeChanceMultiplier: 0
 --- !u!114 &9073638735148964551
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlich eine CharacterStatHandler und PLayerStatHandler ist eigentlich ein UserStatHandler
+public class CharacterStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlich eine CharacterStatHandler und PLayerStatHandler ist eigentlich ein UserStatHandler
 {
     #region Variables
     public ScriptReferences scriptReferences;
@@ -18,10 +16,11 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
         //Space for more Handlers
     }
     
-    public PlayerInformations playerInformations;
+    public CharacterInformations characterInformations;
     [System.Serializable]
-    public class PlayerInformations
+    public class CharacterInformations
     {
+        //Character Information
         [Header("Names")]
         [Space(10)]
         public string foreName;
@@ -31,19 +30,48 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
         [Header("Age")]
         [Space(10)]
         public int currentAge;
+        [Space(25)] 
+        
+        [Header("Class")] 
+        [Space(10)]
+        public Classes classes;
+        public enum Classes
+        {
+            Archer, Guardian, Minstrel
+        }
         [Space(25)]
         
+        [Header("Race")] 
+        [Space(10)]
+        public Races races;
+        public enum Races
+        {
+            Human, Elf, Dwarf
+        }
+    }
+    
+    public LocationInformations locationInformations;
+    [System.Serializable]
+    public class LocationInformations
+    {
+        //Location Information
         [Header("Location")]
         [Space(10)]
         public float currentPosX;
         public  float currentPosY;
         public float currentPosZ;
+        [Space(25)] 
+        
+        [Header("Region")] 
+        [Space(10)]
+        public string currentRegion;
     }
     
     public CurrencyInformations currencyInformations;
     [System.Serializable]
     public class CurrencyInformations
     {
+        //Currency Informations
         [Header("Currencies")]
         [Space(10)]
         public string currencyName1;
@@ -57,13 +85,13 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
         public string currencyName3;
         [Space(10)] 
         public int currentCurrency3;
-
     }
     
     public LevelStatistics levelStatistics;
     [System.Serializable]
     public class LevelStatistics
     {
+        //Level Informations Level_Experience
         [Header("Level")]
         [Space(10)]
         public int minLevel;
@@ -80,7 +108,9 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
         public float currentExperiencePoints;
         [Space(10)]
         public float leftExperiencePoints;
-        
+        [Space(25)]
+
+        //Level Informations Attribute_Points
         [Header("Attribute Points")]
         [Space(10)]
         public int minAttributePoints;
@@ -97,6 +127,7 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
     [System.Serializable]
     public class CombatStatistics
     {
+        //Combat Informations Health_Shield_Armour
         [Header("Defensives")]
         [Space(10)]
         public float minHealth;
@@ -104,10 +135,19 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
         [Space(10)]
         public float currentHealth;
         [Space(25)]
+        
+        public float minShield;
+        public float maxShield;
+        [Space(10)]
+        public float currentShield;
+        [Space (25)]
+        
         public float minArmour;
         public float maxArmour;
         [Space(10)]
         public float currentArmour;
+        
+        //Combat Informations Phys_Tact_Defense
         [Space(25)]
         public float minPhysicalDefense;
         public float maxPhysicalDefense;
@@ -120,6 +160,7 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
         public float currentTacticalDefense;
         [Space(25)]
         
+        //Combat Informations Stam_Mana_Wrath
         [Header("Neutrals")]
         [Space(10)]
         public float minStamina;
@@ -128,6 +169,19 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
         public float currentStamina;
         [Space(25)]
         
+        public float minMana;
+        public float maxMana;
+        [Space(10)]
+        public float currentMana;
+        [Space(25)]
+        
+        public float minWrath;
+        public float maxWrath;
+        [Space(10)]
+        public float currentWrath;
+        [Space(25)]
+        
+        //Combat Informations Phys_Tact_Damage
         [Header("Offensives")]
         [Space(10)]
         public float minPhysicalDamage;
@@ -140,6 +194,8 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
         [Space(10)]
         public float currentTacticalDamage;
         [Space(25)]
+        
+        //Combat Informations Phys_Tact_Penetration
         public float minPhysicalPenetration;
         public float maxPhysicalPenetration;
         [Space(10)]
@@ -150,6 +206,8 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
         [Space(10)]
         public float currentTacticalPenetration;
         [Space(25)]
+        
+        //Combat Informations Crit_Strike_D_C_M
         public float minCriticalStrikeDamage;
         public float maxCriticalStrikeDamage;
         [Space(10)]
@@ -186,13 +244,18 @@ public class PlayerStatHandler : MonoBehaviour //PlayerStatHandler ist eigentlic
 
     private void Update()
     {
-        playerInformations.currentPosX = transform.position.x;
-        playerInformations.currentPosY = transform.position.y;
-        playerInformations.currentPosZ = transform.position.z;
+        locationInformations.currentPosX = transform.position.x;
+        locationInformations.currentPosY = transform.position.y;
+        locationInformations.currentPosZ = transform.position.z;
         
         if (Input.GetKeyDown(KeyCode.K))
         {
-            scriptReferences.playFabManager.GetAllCharacterData(playerInformations.foreName, playerInformations.lastName, playerInformations.currentAge, playerInformations.currentPosX, playerInformations.currentPosY, playerInformations.currentPosZ, currencyInformations.currencyName1, currencyInformations.currentCurrency1, currencyInformations.currencyName2, currencyInformations.currentCurrency2, currencyInformations.currencyName3, currencyInformations.currentCurrency3, levelStatistics.minLevel, levelStatistics.maxLevel, levelStatistics.currentLevel, levelStatistics.minExperiencePoints, levelStatistics.maxExperiencePoints, levelStatistics.currentExperiencePoints, levelStatistics.leftExperiencePoints , levelStatistics.minAttributePoints, levelStatistics.maxAttributePoints, levelStatistics.currentAttributePoints, levelStatistics.spentAttributePoints, levelStatistics.attributeRefundPoints, combatStatistics.minHealth, combatStatistics.maxHealth, combatStatistics.currentHealth, combatStatistics.minStamina, combatStatistics.maxStamina, combatStatistics.currentStamina, combatStatistics.minArmour, combatStatistics.maxArmour, combatStatistics.currentArmour, combatStatistics.minPhysicalDefense, combatStatistics.maxPhysicalDefense, combatStatistics.currentPhysicalDefense, combatStatistics.minTacticalDefense, combatStatistics.maxTacticalDefense, combatStatistics.currentTacticalDefense, combatStatistics.minPhysicalDamage, combatStatistics.maxPhysicalDamage, combatStatistics.currentPhysicalDamage, combatStatistics.minTacticalDamage, combatStatistics.maxTacticalDamage, combatStatistics.currentTacticalDamage, combatStatistics.minPhysicalPenetration, combatStatistics.maxPhysicalPenetration, combatStatistics.currentPhysicalPenetration, combatStatistics.minTacticalPenetration, combatStatistics.maxTacticalPenetration, combatStatistics.currentTacticalPenetration, combatStatistics.minCriticalStrikeDamage, combatStatistics.maxCriticalStrikeDamage, combatStatistics.currentCriticalStrikeDamage, combatStatistics.minCriticalStrikeChance, combatStatistics.maxCriticalStrikeChance, combatStatistics.currentCriticalStrikeChance, combatStatistics.minCriticalStrikeChanceMultiplier, combatStatistics.maxCriticalStrikeChanceMultiplier, combatStatistics.currentCriticalStrikeChanceMultiplier );
+            scriptReferences.playFabManager.GetAllCharacterData(characterInformations.foreName, characterInformations.lastName, characterInformations.currentAge, characterInformations.classes.ToString(), characterInformations.races.ToString(),locationInformations.currentPosX, locationInformations.currentPosY, locationInformations.currentPosZ,locationInformations.currentRegion ,currencyInformations.currencyName1, currencyInformations.currentCurrency1, currencyInformations.currencyName2, currencyInformations.currentCurrency2, currencyInformations.currencyName3, currencyInformations.currentCurrency3, levelStatistics.minLevel, levelStatistics.maxLevel, levelStatistics.currentLevel, levelStatistics.minExperiencePoints, levelStatistics.maxExperiencePoints, levelStatistics.currentExperiencePoints, levelStatistics.leftExperiencePoints , levelStatistics.minAttributePoints, levelStatistics.maxAttributePoints, levelStatistics.currentAttributePoints, levelStatistics.spentAttributePoints, levelStatistics.attributeRefundPoints, combatStatistics.minHealth, combatStatistics.maxHealth, combatStatistics.currentHealth, combatStatistics.minShield, combatStatistics.maxShield, combatStatistics.currentShield, combatStatistics.minArmour, combatStatistics.maxArmour, combatStatistics.currentArmour, combatStatistics.minStamina, combatStatistics.maxStamina, combatStatistics.currentStamina, combatStatistics.minMana, combatStatistics.maxMana, combatStatistics.currentMana, combatStatistics.minWrath, combatStatistics.maxWrath, combatStatistics.currentWrath, combatStatistics.minPhysicalDefense, combatStatistics.maxPhysicalDefense, combatStatistics.currentPhysicalDefense, combatStatistics.minTacticalDefense, combatStatistics.maxTacticalDefense, combatStatistics.currentTacticalDefense, combatStatistics.minPhysicalDamage, combatStatistics.maxPhysicalDamage, combatStatistics.currentPhysicalDamage, combatStatistics.minTacticalDamage, combatStatistics.maxTacticalDamage, combatStatistics.currentTacticalDamage, combatStatistics.minPhysicalPenetration, combatStatistics.maxPhysicalPenetration, combatStatistics.currentPhysicalPenetration, combatStatistics.minTacticalPenetration, combatStatistics.maxTacticalPenetration, combatStatistics.currentTacticalPenetration, combatStatistics.minCriticalStrikeDamage, combatStatistics.maxCriticalStrikeDamage, combatStatistics.currentCriticalStrikeDamage, combatStatistics.minCriticalStrikeChance, combatStatistics.maxCriticalStrikeChance, combatStatistics.currentCriticalStrikeChance, combatStatistics.minCriticalStrikeChanceMultiplier, combatStatistics.maxCriticalStrikeChanceMultiplier, combatStatistics.currentCriticalStrikeChanceMultiplier);
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Debug.Log(characterInformations.classes.ToString());
         }
     }
 

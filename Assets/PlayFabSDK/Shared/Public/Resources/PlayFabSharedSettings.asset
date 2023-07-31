@@ -18,10 +18,10 @@ MonoBehaviour:
   RequestType: 0
   DisableDeviceInfo: 0
   DisableFocusTimeCollection: 0
-  RequestTimeout: 5000
+  RequestTimeout: 2000
   RequestKeepAlive: 1
   LogLevel: -1
   LoggerHost: 
   LoggerPort: 0
   EnableRealTimeLogging: 0
-  LogCapLimit: 1000
+  LogCapLimit: 30

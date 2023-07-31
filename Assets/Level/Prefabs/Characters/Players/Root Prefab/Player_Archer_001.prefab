@@ -142,13 +142,17 @@ MonoBehaviour:
     inventoryHandler: {fileID: 5111798053150540455}
     hudHandler: {fileID: 0}
     playFabManager: {fileID: 3100453030281873325}
-  playerInformations:
+  characterInformations:
     foreName: Florian
     lastName: Wiedenbein
     currentAge: 23
+    classes: 0
+    races: 0
+  locationInformations:
     currentPosX: 0
     currentPosY: 0
     currentPosZ: 0
+    currentRegion: Demarcia
   currencyInformations:
     currencyName1: Gold
     currentCurrency1: 10
@@ -173,6 +177,9 @@ MonoBehaviour:
     minHealth: 0
     maxHealth: 1000
     currentHealth: 10
+    minShield: 0
+    maxShield: 0
+    currentShield: 0
     minArmour: 0
     maxArmour: 0
     currentArmour: 0
@@ -185,6 +192,12 @@ MonoBehaviour:
     minStamina: 0
     maxStamina: 0
     currentStamina: 0
+    minMana: 0
+    maxMana: 0
+    currentMana: 0
+    minWrath: 0
+    maxWrath: 0
+    currentWrath: 0
     minPhysicalDamage: 0
     maxPhysicalDamage: 0
     currentPhysicalDamage: 0
@@ -250,9 +263,12 @@ MonoBehaviour:
     foreName: 
     lastName: 
     currentAge: 0
+    cClass: 
+    cRace: 
     currentPosX: 0
     currentPosY: 0
     currentPosZ: 0
+    currentRegion: 
     currencyName1: 
     currentCurrency1: 0
     currencyName2: 
@@ -274,6 +290,9 @@ MonoBehaviour:
     minHealth: 0
     maxHealth: 0
     currentHealth: 0
+    minShield: 0
+    maxShield: 0
+    currentShield: 0
     minArmour: 0
     maxArmour: 0
     currentArmour: 0
@@ -286,6 +305,12 @@ MonoBehaviour:
     minStamina: 0
     maxStamina: 0
     currentStamina: 0
+    minMana: 0
+    maxMana: 0
+    currentMana: 0
+    minWrath: 0
+    maxWrath: 0
+    currentWrath: 0
     minPhysicalDamage: 0
     maxPhysicalDamage: 0
     currentPhysicalDamage: 0

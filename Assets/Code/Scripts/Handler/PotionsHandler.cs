@@ -29,13 +29,13 @@ public class PotionsHandler : MonoBehaviour
     
     //references
     private SceneManager _sceneManager;
-    private PlayerStatHandler _playerStatHandler;
+    private CharacterStatHandler _characterCharacterStatHandler;
     
     #endregion
     #region Unity Functions
     private void Start()
     {
-        _playerStatHandler = FindObjectOfType<PlayerStatHandler>();
+        _characterCharacterStatHandler = FindObjectOfType<CharacterStatHandler>();
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -55,12 +55,12 @@ public class PotionsHandler : MonoBehaviour
             {
                 case Operation.IncreaseInstant:
                 {
-                    _playerStatHandler.TakeInstantHealth(amount);
+                    _characterCharacterStatHandler.TakeInstantHealth(amount);
                     break;
                 }
                 case Operation.IncreaseOverTime:
                 {
-                    _playerStatHandler.TakeHealOverTime(amount, duration);
+                    _characterCharacterStatHandler.TakeHealOverTime(amount, duration);
                     break;
                 }
             }
@@ -71,12 +71,12 @@ public class PotionsHandler : MonoBehaviour
             {
                 case Operation.DecreaseInstant:
                 {
-                    _playerStatHandler.TakeInstantDamage(amount, penetration);
+                    _characterCharacterStatHandler.TakeInstantDamage(amount, penetration);
                     break;
                 }
                 case Operation.DecreaseOverTime:
                 {
-                    _playerStatHandler.TakeDamageOverTime(amount, penetration, duration);
+                    _characterCharacterStatHandler.TakeDamageOverTime(amount, penetration, duration);
                     break;
                 }
             }

@@ -12,7 +12,7 @@ public class HUDHandler : MonoBehaviour
     public TMP_Text ExperienceBarText_Text_TMP;
     
     
-    private PlayerStatHandler _playerStatHandler;
+    private CharacterStatHandler _characterStatHandler;
     #endregion
 
     #region Unity Functions
@@ -43,7 +43,7 @@ public class HUDHandler : MonoBehaviour
 
     private void Start()
     {
-        _playerStatHandler = FindObjectOfType<PlayerStatHandler>();
+        _characterStatHandler = FindObjectOfType<CharacterStatHandler>();
     }
     #endregion
 

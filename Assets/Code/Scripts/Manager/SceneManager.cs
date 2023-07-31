@@ -6,8 +6,8 @@ public class SceneManager : MonoBehaviour
     //references
     [Header("Player References")]
     public GameObject player;
-    private PlayerStatHandler playerStatHandler;
-    private PlayerController playerController;
+    private CharacterStatHandler _characterStatHandler;
+    private PlayerController _playerController;
     
     [Header("Other")]
     #endregion
@@ -52,9 +52,9 @@ public class SceneManager : MonoBehaviour
         //Get Player by Tag Player
         player = GameObject.FindGameObjectWithTag("Player");
         //Get PlayerStatHandler
-        playerStatHandler = player.GetComponent<PlayerStatHandler>();
+        _characterStatHandler = player.GetComponent<CharacterStatHandler>();
         //GetPlayerController
-        playerController = player.GetComponent<PlayerController>();
+        _playerController = player.GetComponent<PlayerController>();
     }
     #endregion
 }

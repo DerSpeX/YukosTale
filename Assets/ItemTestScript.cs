@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class ItemTestScript : MonoBehaviour
 {
-    private PlayerStatHandler _playerStatHandler;
+    private CharacterStatHandler _characterStatHandler;
     public float minExperience;
     public float maxExperience; 
     private void Start()
     {
-        _playerStatHandler = FindObjectOfType<PlayerStatHandler>();
+        _characterStatHandler = FindObjectOfType<CharacterStatHandler>();
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            _playerStatHandler.AddExperience(Random.Range(minExperience, maxExperience));
+            _characterStatHandler.AddExperience(Random.Range(minExperience, maxExperience));
         }
     }
 }

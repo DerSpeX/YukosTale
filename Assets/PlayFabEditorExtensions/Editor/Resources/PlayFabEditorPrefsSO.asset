@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: PlayFabEditorExtensions:PlayFab.PfEditor:PlayFabEditorPrefsSO
   DevAccountEmail: florian.wiedenbein@games-academy.de
-  DevAccountToken: 6tdmwuz6fa53h9diu3j7kq45qi1sasr5erksmn859z5jkbx7to7arbf9c4mcm91amh8bp4orr7abzwbxj9azd5iikjurpycdk5qdettqarudpfykjukqpa76jkngrunqjaugedjc5wig5f9nx999b95yateq3xqpxbcobh85iebz9tfpf39oz1it66rn4enfbikqdg1t
+  DevAccountToken: x5rhsaywtrwscztowtomp6adh1goke71k45e9xh5d1dgr3jt4ziumwao713nhf3czghuuuicti1dj1z476jtukaggh55rnboq3j5jxb15ktzss6dpxbi94y4qjqd8pywq3pddj3rgo1b8bh6i5xd3rnh3ino488rnwr8rt86peoif8jfwt4sko4bmdf1wf11gm5cxjja
   AadAuthorization: 
-  SelectedStudio: Holy Games Studio
+  SelectedStudio: 
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 

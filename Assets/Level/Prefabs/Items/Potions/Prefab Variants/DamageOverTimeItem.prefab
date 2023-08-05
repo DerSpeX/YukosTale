@@ -14,15 +14,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1189741994937098211, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1189741994937098211, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.002
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 1189741994937098211, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.992
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1189741994937098211, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -84,13 +84,17 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7246563056162051280, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
+      propertyPath: m_text
+      value: Damage Over Time
+      objectReference: {fileID: 0}
     - target: {fileID: 7940555219892598544, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: amount
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7940555219892598544, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: duration
-      value: 5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7940555219892598544, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: operation
@@ -99,6 +103,10 @@ PrefabInstance:
     - target: {fileID: 7940555219892598544, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: potionType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7940555219892598544, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
+      propertyPath: penetration
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -153,7 +161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0

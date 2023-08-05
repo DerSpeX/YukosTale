@@ -3674,7 +3674,7 @@ namespace PlayFab.AdminModels
         /// <summary>
         /// Array of items to grant and the users to whom the items are to be granted.
         /// </summary>
-        public List<ItemGrant> ItemGrants;
+        public List<string> ItemGrants;
     }
 
     /// <summary>

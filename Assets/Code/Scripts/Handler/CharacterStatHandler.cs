@@ -146,7 +146,7 @@ public class CharacterStatHandler : MonoBehaviour //PlayerStatHandler ist eigent
         public float maxArmour;
         [Space(10)]
         public float currentArmour;
-        
+
         //Combat Informations Phys_Tact_Defense
         [Space(25)]
         public float minPhysicalDefense;
@@ -159,6 +159,21 @@ public class CharacterStatHandler : MonoBehaviour //PlayerStatHandler ist eigent
         [Space(10)]
         public float currentTacticalDefense;
         [Space(25)]
+        
+        //Combat Informations Defensives_Regeneration
+        [Header(" Defensives Regeneration")]
+        [Space(10)]
+        public float minHealthReg;
+        public float maxHealthReg;
+        [Space(10)]
+        public float currentHealthReg;
+        [Space(25)]
+        
+        public float minShieldReg;
+        public float maxShieldReg;
+        [Space(10)]
+        public float currentShieldReg;
+        [Space (25)]
         
         //Combat Informations Stam_Mana_Wrath
         [Header("Neutrals")]
@@ -180,6 +195,27 @@ public class CharacterStatHandler : MonoBehaviour //PlayerStatHandler ist eigent
         [Space(10)]
         public float currentWrath;
         [Space(25)]
+
+        //Combat Informations Neutrals_Regenerations
+        [Header(" Neutrals Regenerations")]
+        [Space(10)]
+        public float minStaminaReg;
+        public float maxStaminaReg;
+        [Space(10)]
+        public float currentStaminaReg;
+        [Space(25)]
+        
+        public float minManaReg;
+        public float maxManaReg;
+        [Space(10)]
+        public float currentManaReg;
+        [Space (25)]
+        
+        public float minWrathReg;
+        public float maxWrathReg;
+        [Space(10)]
+        public float currentWrathReg;
+        [Space (25)]
         
         //Combat Informations Phys_Tact_Damage
         [Header("Offensives")]
@@ -215,24 +251,17 @@ public class CharacterStatHandler : MonoBehaviour //PlayerStatHandler ist eigent
         [Space(25)]
         public float minCriticalStrikeChance;
         public float maxCriticalStrikeChance;
-        [Space(10)]
+        [Space(10)] 
         public float currentCriticalStrikeChance;
-        [Space(25)]
-        public float minCriticalStrikeChanceMultiplier;
-        public float maxCriticalStrikeChanceMultiplier;
-        [Space(10)]
-        public float currentCriticalStrikeChanceMultiplier;
+
     }
     #endregion
     #region Unity Functions
-
     private void Awake()
     {
         combatStatistics.currentHealth = combatStatistics.maxHealth; //Later, combatStatistics.currentHealth = cloud.currentHealth... -> Sync Local with cloud!
-        scriptReferences.playFabManager.LogIn();
-        Debug.Log("LOGIN IST FERTIG!");
+        scriptReferences.playFabManager = PlayFabManager.PlayFabManagerInstance;
     }
-
     private void Start()
     {
         //Möglicherweise SPäter zu einem GameManager auslagern und dort erstmalige Updates etc. durchlaufen lassen
@@ -241,7 +270,6 @@ public class CharacterStatHandler : MonoBehaviour //PlayerStatHandler ist eigent
         UpdateHUDLevelAndExperienceStats();
         Debug.Log("Level Stats wurden geupdatedet!");
     }
-
     private void Update()
     {
         locationInformations.currentPosX = transform.position.x;
@@ -250,15 +278,14 @@ public class CharacterStatHandler : MonoBehaviour //PlayerStatHandler ist eigent
         
         if (Input.GetKeyDown(KeyCode.K))
         {
-            scriptReferences.playFabManager.GetAllCharacterData(characterInformations.foreName, characterInformations.lastName, characterInformations.currentAge, characterInformations.classes.ToString(), characterInformations.races.ToString(),locationInformations.currentPosX, locationInformations.currentPosY, locationInformations.currentPosZ,locationInformations.currentRegion ,currencyInformations.currencyName1, currencyInformations.currentCurrency1, currencyInformations.currencyName2, currencyInformations.currentCurrency2, currencyInformations.currencyName3, currencyInformations.currentCurrency3, levelStatistics.minLevel, levelStatistics.maxLevel, levelStatistics.currentLevel, levelStatistics.minExperiencePoints, levelStatistics.maxExperiencePoints, levelStatistics.currentExperiencePoints, levelStatistics.leftExperiencePoints , levelStatistics.minAttributePoints, levelStatistics.maxAttributePoints, levelStatistics.currentAttributePoints, levelStatistics.spentAttributePoints, levelStatistics.attributeRefundPoints, combatStatistics.minHealth, combatStatistics.maxHealth, combatStatistics.currentHealth, combatStatistics.minShield, combatStatistics.maxShield, combatStatistics.currentShield, combatStatistics.minArmour, combatStatistics.maxArmour, combatStatistics.currentArmour, combatStatistics.minStamina, combatStatistics.maxStamina, combatStatistics.currentStamina, combatStatistics.minMana, combatStatistics.maxMana, combatStatistics.currentMana, combatStatistics.minWrath, combatStatistics.maxWrath, combatStatistics.currentWrath, combatStatistics.minPhysicalDefense, combatStatistics.maxPhysicalDefense, combatStatistics.currentPhysicalDefense, combatStatistics.minTacticalDefense, combatStatistics.maxTacticalDefense, combatStatistics.currentTacticalDefense, combatStatistics.minPhysicalDamage, combatStatistics.maxPhysicalDamage, combatStatistics.currentPhysicalDamage, combatStatistics.minTacticalDamage, combatStatistics.maxTacticalDamage, combatStatistics.currentTacticalDamage, combatStatistics.minPhysicalPenetration, combatStatistics.maxPhysicalPenetration, combatStatistics.currentPhysicalPenetration, combatStatistics.minTacticalPenetration, combatStatistics.maxTacticalPenetration, combatStatistics.currentTacticalPenetration, combatStatistics.minCriticalStrikeDamage, combatStatistics.maxCriticalStrikeDamage, combatStatistics.currentCriticalStrikeDamage, combatStatistics.minCriticalStrikeChance, combatStatistics.maxCriticalStrikeChance, combatStatistics.currentCriticalStrikeChance, combatStatistics.minCriticalStrikeChanceMultiplier, combatStatistics.maxCriticalStrikeChanceMultiplier, combatStatistics.currentCriticalStrikeChanceMultiplier);
+            scriptReferences.playFabManager.playFabHandler.GetAllCharacterData(characterInformations.foreName, characterInformations.lastName, characterInformations.currentAge, characterInformations.classes.ToString(), characterInformations.races.ToString(),locationInformations.currentPosX, locationInformations.currentPosY, locationInformations.currentPosZ,locationInformations.currentRegion ,currencyInformations.currencyName1, currencyInformations.currentCurrency1, currencyInformations.currencyName2, currencyInformations.currentCurrency2, currencyInformations.currencyName3, currencyInformations.currentCurrency3, levelStatistics.minLevel, levelStatistics.maxLevel, levelStatistics.currentLevel, levelStatistics.minExperiencePoints, levelStatistics.maxExperiencePoints, levelStatistics.currentExperiencePoints, levelStatistics.leftExperiencePoints , levelStatistics.minAttributePoints, levelStatistics.maxAttributePoints, levelStatistics.currentAttributePoints, levelStatistics.spentAttributePoints, levelStatistics.attributeRefundPoints, combatStatistics.minHealth, combatStatistics.maxHealth, combatStatistics.currentHealth, combatStatistics.minShield, combatStatistics.maxShield, combatStatistics.currentShield, combatStatistics.minArmour, combatStatistics.maxArmour, combatStatistics.currentArmour, combatStatistics.minStamina, combatStatistics.maxStamina, combatStatistics.currentStamina, combatStatistics.minMana, combatStatistics.maxMana, combatStatistics.currentMana, combatStatistics.minWrath, combatStatistics.maxWrath, combatStatistics.currentWrath, combatStatistics.minPhysicalDefense, combatStatistics.maxPhysicalDefense, combatStatistics.currentPhysicalDefense, combatStatistics.minTacticalDefense, combatStatistics.maxTacticalDefense, combatStatistics.currentTacticalDefense, combatStatistics.minPhysicalDamage, combatStatistics.maxPhysicalDamage, combatStatistics.currentPhysicalDamage, combatStatistics.minTacticalDamage, combatStatistics.maxTacticalDamage, combatStatistics.currentTacticalDamage, combatStatistics.minPhysicalPenetration, combatStatistics.maxPhysicalPenetration, combatStatistics.currentPhysicalPenetration, combatStatistics.minTacticalPenetration, combatStatistics.maxTacticalPenetration, combatStatistics.currentTacticalPenetration, combatStatistics.minCriticalStrikeDamage, combatStatistics.maxCriticalStrikeDamage, combatStatistics.currentCriticalStrikeDamage, combatStatistics.minCriticalStrikeChance, combatStatistics.maxCriticalStrikeChance, combatStatistics.currentCriticalStrikeChance, combatStatistics.minHealthReg, combatStatistics.maxHealthReg, combatStatistics.currentHealthReg, combatStatistics.minShieldReg, combatStatistics.maxShieldReg, combatStatistics.currentShieldReg, combatStatistics.minStaminaReg, combatStatistics.maxStaminaReg, combatStatistics.currentStaminaReg, combatStatistics.minManaReg, combatStatistics.maxManaReg, combatStatistics.currentManaReg, combatStatistics.minWrathReg, combatStatistics.maxWrathReg, combatStatistics.currentWrathReg);
         }
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            Debug.Log(characterInformations.classes.ToString());
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Mid_Level");
         }
     }
-
     #endregion
     #region Custom Functions
     /// <summary>
@@ -376,7 +403,6 @@ public class CharacterStatHandler : MonoBehaviour //PlayerStatHandler ist eigent
         combatStatistics.currentPhysicalDefense = Random.Range(combatStatistics.minPhysicalDefense, combatStatistics.maxPhysicalDefense);
         return combatStatistics.currentPhysicalDefense;
     } //Maybe call it CalculatePhysicalDefense
-    
     /// <summary>
     /// Leveling Area
     /// </summary>
@@ -481,7 +507,5 @@ public class CharacterStatHandler : MonoBehaviour //PlayerStatHandler ist eigent
     {
         scriptReferences.hudHandler.UpdatePlayerLevelAndExperienceStats(levelStatistics.currentLevel, levelStatistics.minExperiencePoints, levelStatistics.maxExperiencePoints, levelStatistics.currentExperiencePoints);
     }
-    
-
     #endregion
 }

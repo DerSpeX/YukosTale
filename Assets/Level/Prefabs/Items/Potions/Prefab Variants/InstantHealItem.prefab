@@ -10,19 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 201490280470362563, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: m_Name
-      value: InstantHealItem Variant
+      value: InstantHealItem
       objectReference: {fileID: 0}
     - target: {fileID: 1189741994937098211, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1189741994937098211, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.978
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1189741994937098211, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.178
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1189741994937098211, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -55,6 +55,18 @@ PrefabInstance:
     - target: {fileID: 1189741994937098211, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3136732166659382453, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
+      propertyPath: m_Color.g
+      value: 0.46666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 3136732166659382453, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246563056162051280, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
+      propertyPath: m_text
+      value: Instant Health
       objectReference: {fileID: 0}
     - target: {fileID: 7940555219892598544, guid: 9b1cbe166e71c104d962fb67a2cf39e9, type: 3}
       propertyPath: duration

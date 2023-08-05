@@ -6,37 +6,35 @@ public class SceneManager : MonoBehaviour
     //references
     [Header("Player References")]
     public GameObject player;
-    private CharacterStatHandler _characterStatHandler;
-    private PlayerController _playerController;
-    
-    [Header("Other")]
+    public CharacterStatHandler _characterStatHandler;
+    public PlayerController _playerController;
     #endregion
     #region Singleton
-    private static SceneManager instance;
-    public static SceneManager Instance
+    private static SceneManager sceneManagerInstance;
+    public static SceneManager SceneManagerInstance
     {
         get
         {
 #if UNITY_EDITOR
-            if (instance == null)
+            if (sceneManagerInstance == null)
             {
                 Debug.LogWarning(
-                    "[SingletonWarning]: No instance of Session found. Make sure there is one in your scene");
+                    "[SingletonWarning]: No sceneManangerInstance of Session found. Make sure there is one in your scene");
             }
 #endif
-            return instance;
+            return sceneManagerInstance;
         }
     }
     private void InitSingleton()
     {
-        if (instance != null && instance != this)
+        if (sceneManagerInstance != null && sceneManagerInstance != this)
         {
             Destroy(this.gameObject);
             return;
         }
         else
         {
-            instance = this;
+            sceneManagerInstance = this;
             DontDestroyOnLoad(this.gameObject);
         }
     }
@@ -51,9 +49,9 @@ public class SceneManager : MonoBehaviour
         //||PLAYER||\\
         //Get Player by Tag Player
         player = GameObject.FindGameObjectWithTag("Player");
-        //Get PlayerStatHandler
+        //Get CharacterStatHandler by Player
         _characterStatHandler = player.GetComponent<CharacterStatHandler>();
-        //GetPlayerController
+        //Get PlayerController by Player
         _playerController = player.GetComponent<PlayerController>();
     }
     #endregion

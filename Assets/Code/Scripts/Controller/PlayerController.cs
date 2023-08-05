@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private bool canMove = true;
     private bool wasInteractPressed;
+    private bool isInputActive;
     
     
     #endregion

@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
   m_Name: PlayFabEditorPrefsSO
-  m_EditorClassIdentifier: PlayFabEditorExtensions:PlayFab.PfEditor:PlayFabEditorPrefsSO
+  m_EditorClassIdentifier: 
   DevAccountEmail: florian.wiedenbein@games-academy.de
-  DevAccountToken: utadyb64h5btojjcs8u4hpuax4di7po1koyidxossddxwd43eenffxc9smomo1hn7yjpttwn85n4doyhhnfqgdu74dxh3qamop4ejrmrupndtzqorigf6ob74fcrqo19bhh43suyzgkkrmda6o7jx65u1n1zst8rj8qyjxw41fh54hwen3bt9e9cobhqzwx3dnp7xnqp
+  DevAccountToken: 6ok7dqnak6qteskmx9sxmwcmwnukszhitcdxzijrzfderggw4sw4rq1ephsf8q1k1ub8y4mapuufxcn75tons6uphmaama5g1nckmeb41rabdro8ueg3ew9fc5px3zuqdcweh5rtgqfxfnx3jt6duzmminpsd8nuhc64z5mw5nbrxjznnzrombbd5ggm7xzqcwkc7mip
   AadAuthorization: 
-  SelectedStudio: 
+  SelectedStudio: Holy Games Studio
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 0
-  curSubMenuIdx: 0
+  curMainMenuIdx: 2
+  curSubMenuIdx: 1

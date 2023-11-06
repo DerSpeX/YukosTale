@@ -777,8 +777,8 @@ public class PlayFabHandler : MonoBehaviour
         Debug.Log("Received Characters from User!");
         if (result.Data != null && result.Data.ContainsKey("Characters"))
         {
-            List<UserCharacters> userCharacters =
-               JsonConvert.DeserializeObject<List<UserCharacters>>(result.Data["Characters"].Value);
+            //List<UserCharacters> userCharacters =
+             //  JsonConvert.DeserializeObject<List<UserCharacters>>(result.Data["Characters"].Value);
            
               Debug.Log(result.Data["Characters"].Value.ToString());
         }

@@ -14,11 +14,33 @@ public class Arrow_Standard_001 : MonoBehaviour
     [SerializeField] private Rigidbody2D rb; // Rigidbody2D-Komponente des Pfeils
     [Description("Game Object for Collision Effect when hitting the Target")]
     [SerializeField] private GameObject impactEffect; // Referenz auf ein Effekt-Objekt, das abgespielt wird, wenn der Pfeil einschlägt
+
+
+    public float damage;
+    public float penetration;
+    public float duration;
+
+    [SerializeField] private Operation operation;
+    [SerializeField]
+    private enum Operation
+    {
+        InstantDamage,
+        DamageOverTime
+    }
+
+
+    private CharacterStatHandler _characterCharacterStatHandler;
+
+
     #endregion
     #region Unity Functions
     // Pfeil wird beim Start in eine Richtung geschossen
     void Start()
     {
+        _characterCharacterStatHandler = FindObjectOfType<CharacterStatHandler>();
+        damage = _characterCharacterStatHandler.combatStatistics.currentPhysicalDamage; //Vereinfacht
+        penetration = _characterCharacterStatHandler.combatStatistics.currentPhysicalPenetration; //Vereinfacht
+
         rb.velocity = transform.right * arrowSpeed;
     }
     private void Update()
@@ -31,8 +53,35 @@ public class Arrow_Standard_001 : MonoBehaviour
         if (collison.gameObject.tag == "Enemy") // Wenn der Pfeil ein Objekt mit dem Tag "Enemy" trifft
         {
             GameObject impactEffectGO = Instantiate(impactEffect, collison.gameObject.transform.localPosition, collison.gameObject.transform.localRotation); // Erzeuge den Aufprall-Effekt an der Position des Pfeils
-            Destroy(impactEffectGO, 1f);
-            Destroy(gameObject); // Zerstöre den Pfeil
+            EnemyStatHandler enemyStatHandler = collison.GetComponent<EnemyStatHandler>();
+
+            switch (operation)
+            {
+                case Operation.InstantDamage:
+                {
+                        if (enemyStatHandler != null)
+                        {
+                            enemyStatHandler.TakeInstantDamage(damage, penetration);
+                            Destroy(impactEffectGO, 1f);
+                            Destroy(gameObject); // Zerstöre den Pfeil
+                        }
+                        break;
+                }
+
+                case Operation.DamageOverTime:
+                {
+                        if (enemyStatHandler != null)
+                        {
+                            enemyStatHandler.TakeDamageOverTime(damage, penetration, duration);
+                            Destroy(impactEffectGO, 3f);
+                            Destroy(gameObject); // Zerstöre den Pfeil
+                        }
+                        break;
+                }
+            }
+            
+            //Destroy(impactEffectGO, 1f);
+            //Destroy(gameObject); // Zerstöre den Pfeil
         }
     }
 

@@ -14,15 +14,14 @@ public class PotionsHandler : MonoBehaviour
     }
 
     [SerializeField] private Operation operation;
-
-    [SerializeField]
-    private enum Operation
+    [SerializeField] private enum Operation
     {
         IncreaseInstant,
         IncreaseOverTime,
         DecreaseInstant,
         DecreaseOverTime
     }
+
     [SerializeField] private float amount;
     [SerializeField] private float duration;
     [SerializeField] private float penetration;

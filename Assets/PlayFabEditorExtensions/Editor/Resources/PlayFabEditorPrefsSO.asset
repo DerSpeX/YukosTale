@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: florian.wiedenbein@games-academy.de
-  DevAccountToken: 6ok7dqnak6qteskmx9sxmwcmwnukszhitcdxzijrzfderggw4sw4rq1ephsf8q1k1ub8y4mapuufxcn75tons6uphmaama5g1nckmeb41rabdro8ueg3ew9fc5px3zuqdcweh5rtgqfxfnx3jt6duzmminpsd8nuhc64z5mw5nbrxjznnzrombbd5ggm7xzqcwkc7mip
+  DevAccountToken: querm5koxkuppoyygt8t3i1roj5q7guzod86hxa7o8bpoe5d3ak6zzcnrj59ynereugs477pfqryzk1s9kxzhbbepsbdd778y96wmomodd3jp866tp5k4zxubt4ng5bhtnfjiwhr4mqain7u54tqjppekk5btw344mduj5qdk3twruton646xp8dnqfctjsndx5ocrut
   AadAuthorization: 
-  SelectedStudio: Holy Games Studio
+  SelectedStudio: 
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 2
-  curSubMenuIdx: 1
+  curMainMenuIdx: 0
+  curSubMenuIdx: 0

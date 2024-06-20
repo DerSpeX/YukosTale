@@ -58,7 +58,7 @@ public class CharacterStatHandler : MonoBehaviour //PlayerStatHandler ist eigent
         [Header("Location")]
         [Space(10)]
         public float currentPosX;
-        public  float currentPosY;
+        public float currentPosY;
         public float currentPosZ;
         [Space(25)] 
         

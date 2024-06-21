@@ -16,7 +16,7 @@ public class EnemyStatHandler : MonoBehaviour
     }
     private void Update()
     {
-        hpText.text = currentHealth.ToString() + "/" + maxHealth.ToString();
+        hpText.text = currentHealth.ToString("F1") + "/" + maxHealth.ToString("F1");
         if(currentHealth > 0.74f * maxHealth)
         {
            hpText.color = Color.green;

@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6618741823453195310}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.548, y: -1.02, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -308,8 +308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb08b96330f047479c0b2fd9b71b8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
+  minHealth: 0
   maxHealth: 100
+  currentHealth: 0
+  defense: 75
   hpText: {fileID: 2592566107133064718}
 --- !u!70 &6112630974135280348
 CapsuleCollider2D:
